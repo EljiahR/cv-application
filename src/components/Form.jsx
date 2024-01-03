@@ -1,21 +1,13 @@
 import { useState } from "react"
 
 
-export default function Form(){
-
-    let [generalInfo, setGeneralInfo] = useState({name:"fdsa",email:"",phone:""});
-
-    const handleGeneral = (target, input)=>{
-        let newGeneral = {...generalInfo}
-        newGeneral[target] = input
-        setGeneralInfo(newGeneral)
-    }
-
+export default function Form({ generalInfo, handleGeneral}){
 
     return (
         <>
             <form action="POST">
                 <section id="general">
+                    <h2>General Info</h2>
                     <label htmlFor="name">Name: </label>
                     <input value={generalInfo.name} type="text" id="name" onChange={(e)=>handleGeneral("name",e.target.value)} />
                     
@@ -26,6 +18,7 @@ export default function Form(){
                     <input value={generalInfo.phone} type="phone" id="phone" onChange={(e)=>handleGeneral("phone",e.target.value)} />
                 </section>
                 <section id="education">
+                    <h2>Education</h2>
                     <label htmlFor="school-name">School Name: </label>
                     <input type="text" id="school-name" />
                     
@@ -35,8 +28,9 @@ export default function Form(){
                     <label htmlFor="study-date">Date of Study: </label>
                     <input type="date" id="study-date" />
                 </section>
-                <section id="practical">
-                <label htmlFor="company-name">Company Name: </label>
+                <section id="experience">
+                    <h2>Experience</h2>
+                    <label htmlFor="company-name">Company Name: </label>
                     <input type="text" id="company-name" />
                     
                     <label htmlFor="position-title">Position Title: </label>
@@ -53,12 +47,6 @@ export default function Form(){
                 </section>
                 <button type="button" id="submit">Submit</button>
             </form>
-            <div id="result">
-                <p>Name: {generalInfo.name}</p>
-                <p>Email: {generalInfo.email}</p>
-                <p>Phone Number: {generalInfo.phone}</p>
-                
-            </div>
         </>
     )
 }
