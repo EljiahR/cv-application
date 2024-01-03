@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import "../styles/card.css"
 
-export default function Card({ children }){
+export default function Card({ children, onClick }){
     return (
-        <div className="card">{children}</div>
+        <div onClick={onClick} className="card">{children}</div>
     )
 }

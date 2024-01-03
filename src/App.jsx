@@ -15,9 +15,19 @@ function App() {
       setGeneralInfo(newGeneral)
   }
 
+  const handleEducation = (target, input)=>{
+  
+  }
+  
+  const handleWork = (target, input)=>{
+  
+  }
+
   return (
     <>
-      <Form generalInfo={generalInfo} handleGeneral={handleGeneral}/>
+      <Form generalInfo={generalInfo} handleGeneral={handleGeneral}
+      educationInfo={educationInfo} handleEducation={handleEducation}
+      workInfo={workInfo} handleWork={handleWork}/>
       <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>
     
