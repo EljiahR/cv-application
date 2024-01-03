@@ -1,0 +1,13 @@
+#resume{
+    width: 70%;
+}
+
+#resume-head{
+    background-color: rgb(9, 9, 121);
+    color: aliceblue;
+}
+
+#head-info{
+    display:flex;
+    justify-content: space-around;
+}

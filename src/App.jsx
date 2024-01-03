@@ -5,18 +5,20 @@ import Resume from './components/Resume';
 
 function App() {
 
-  let [generalInfo, setGeneralInfo] = useState({name:"fdsa",email:"",phone:""});
+  let [generalInfo, setGeneralInfo] = useState({name:"John Smith",email:"hisname@yahoo.com",phone:"808-555-1414"});
+  let [educationInfo, setEducationInfo] = useState([])
+  let [workInfo, setWorkInfo] = useState([])
 
-    const handleGeneral = (target, input)=>{
-        let newGeneral = {...generalInfo}
-        newGeneral[target] = input
-        setGeneralInfo(newGeneral)
-    }
+  const handleGeneral = (target, input)=>{
+      let newGeneral = {...generalInfo}
+      newGeneral[target] = input
+      setGeneralInfo(newGeneral)
+  }
 
   return (
     <>
       <Form generalInfo={generalInfo} handleGeneral={handleGeneral}/>
-      <Resume generalInfo={generalInfo} />
+      <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>
     
     
