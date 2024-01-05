@@ -3,47 +3,23 @@ import { useState } from "react"
 import Card from "./Card"
 import "../styles/form.css"
 
-function Education({ educationInfo, handleEducation, handleNewEducation, expand, id }){
+function Education({ educationInfo, handleEducation, expand }){
     if(expand){
-        if(id){
+        return(
+            <>
+                <label htmlFor="school-name">School Name</label>
+                <input value={educationInfo["school-name"]} onChange={(e)=>handleEducation("school-name",e.target.value)} type="text" id="school-name" />
+                
+                <label htmlFor="study-title">Title of Study</label>
+                <input value={educationInfo["study-title"]} onChange={(e)=>handleEducation("study-title",e.target.value)} type="text" id="study-title" />
+                
+                <label htmlFor="study-date-start">Start Date</label>
+                <input value={educationInfo["study-date-start"]} onChange={(e)=>handleEducation("study-date-start",e.target.value)} type="text" id="study-date-start" />
 
-        } else {
-            let newId
-            let eduIndex
-            if(educationInfo.length > 1){
-                let currentIds = educationInfo.map((eduObj)=>{
-                    return eduObj.id
-                })
-                let counter = 0
-                while(!newId){
-                    if(currentIds.indexOf(counter) === -1){
-                        newId = counter
-                        eduIndex = currentIds.length
-                    }
-                    counter++
-                }
-            } else {
-                newId = 0
-                eduIndex = 0
-            }
-            handleNewEducation(newId)
-            console.log(educationInfo)
-            return(
-                <>
-                    <label htmlFor="school-name">School Name</label>
-                    <input value={educationInfo[eduIndex]["school-name"]} onChange={(e)=>{handleEducation("school-name", newId, e.target.value)}} type="text" id="school-name" />
-                    
-                    <label htmlFor="study-title">Title of Study</label>
-                    <input value={educationInfo[eduIndex]["study-title"]} onChange={(e)=>{handleEducation("study-title", newId, e.target.value)}} type="text" id="study-title" />
-                    
-                    <label htmlFor="study-date-start">Start Date</label>
-                    <input value={educationInfo[eduIndex]["study-date-start"]} onChange={(e)=>{handleEducation("study-date-start", newId, e.target.value)}} type="text" id="study-date-start" />
-    
-                    <label htmlFor="study-date-end">End Date</label>
-                    <input value={educationInfo[eduIndex]["study-date-end"]} onChange={(e)=>{handleEducation("study-date-end", newId, e.target.value)}} type="text" id="study-date-start" />
-                </>
-            )
-        }
+                <label htmlFor="study-date-end">End Date</label>
+                <input value={educationInfo["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
+            </>
+        )
         
     }else{
         return null
@@ -76,7 +52,7 @@ function Work({ workInfo, handleWork, expand }){
 }
 
 export default function Form({ generalInfo, handleGeneral, educationInfo,
-     handleEducation, handleNewEducation, workInfo, handleWork }){
+     handleEducation, workInfo, handleWork }){
 
     let [expanded, setExpanded] = useState({edu:false,work:false})
 
@@ -107,7 +83,7 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
                     <section id="education">
                         <h2>Education</h2>
                         <Education educationInfo={educationInfo}
-     handleEducation={handleEducation} handleNewEducation={handleNewEducation} expand={expanded.edu} />
+     handleEducation={handleEducation} expand={expanded.edu} />
                     </section>
                 </Card>
                 <Card onClick={()=>handleExpand("work")}>

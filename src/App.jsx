@@ -6,8 +6,8 @@ import Resume from './components/Resume';
 function App() {
 
   let [generalInfo, setGeneralInfo] = useState({name:"John Smith",email:"hisname@yahoo.com",phone:"808-555-1414"});
-  let [educationInfo, setEducationInfo] = useState([])
-  let [workInfo, setWorkInfo] = useState([])
+  let [educationInfo, setEducationInfo] = useState({"school-name":"Business University", "study-title": "Business", "study-date-start":"03/2002","study-date-end":"present"})
+  let [workInfo, setWorkInfo] = useState({"company-name":"Big Company", "position-title": "Janitor", "responsibilities":"Mopping all 100 floors of Big Company every day", "work-date-start": "12/2001", "work-date-end": "present"})
 
   const handleGeneral = (target, input)=>{
       let newGeneral = {...generalInfo}
@@ -15,29 +15,9 @@ function App() {
       setGeneralInfo(newGeneral)
   }
 
-  const handleEducation = (target, id, input)=>{
-    let newEducation = educationInfo.map((eduObj)=>{
-      if(id === eduObj.id){
-        let newEduObj = {...eduObj}
-        newEduObj[target] = input
-        return newEduObj
-      } else {
-        return {...eduObj}
-      }
-    })
-    setEducationInfo(newEducation)
-  }
-
-  const handleNewEducation = (newId)=>{
-    
-    const newEducation = [...educationInfo,{
-      id:newId,
-      "school-name":"",
-      "study-title":"",
-      "study-date-start":"",
-      "study-date-end":""  
-    }]
-    console.log(newEducation)
+  const handleEducation = (target, input)=>{
+    let newEducation = {...educationInfo}
+    newEducation[target] = input
     setEducationInfo(newEducation)
   }
 
@@ -50,7 +30,7 @@ function App() {
   return (
     <>
       <Form generalInfo={generalInfo} handleGeneral={handleGeneral}
-      educationInfo={educationInfo} handleEducation={handleEducation} handleNewEducation={handleNewEducation}
+      educationInfo={educationInfo} handleEducation={handleEducation}
       workInfo={workInfo} handleWork={handleWork}/>
       <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>

@@ -2,17 +2,17 @@
 import "../styles/resume.css"
 
 function Education({ info }){
-    if(info.length > 0){
+    if(info){
         return(
             <div>
                 <h2>Education</h2>
-                {info.map(eduObj=>{
-                    return (
-                        <div key={eduObj.id} className="edu-row">
-                            {eduObj["school-name"]}
-                        </div>
-                    )
-                })}
+                <div className="education-row">
+                    
+                    <p>{info["study-date-start"]}-{info["study-date-end"]}</p>
+                    <h3>{info["school-name"]}</h3>
+                    <p>{info["study-title"]}</p>
+
+                </div>
             </div>
         )
     } else {
