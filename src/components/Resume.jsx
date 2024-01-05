@@ -6,6 +6,13 @@ function Education({ info }){
         return(
             <div>
                 <h2>Education</h2>
+                {info.map(eduObj=>{
+                    return (
+                        <div key={eduObj.id} className="edu-row">
+                            {eduObj["school-name"]}
+                        </div>
+                    )
+                })}
             </div>
         )
     } else {

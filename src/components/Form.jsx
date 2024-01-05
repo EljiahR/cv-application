@@ -3,43 +3,71 @@ import { useState } from "react"
 import Card from "./Card"
 import "../styles/form.css"
 
-function Education({ expand }){
+function Education({ educationInfo, handleEducation, handleNewEducation, expand, id }){
     if(expand){
-        return(
-            <>
-                <label htmlFor="school-name">School Name: </label>
-                <input type="text" id="school-name" />
-                
-                <label htmlFor="study-title">Title of Study: </label>
-                <input type="text" id="study-title" />
-                
-                <label htmlFor="study-date">Date of Study: </label>
-                <input type="date" id="study-date" />
-            </>
-        )
+        if(id){
+
+        } else {
+            let newId
+            let eduIndex
+            if(educationInfo.length > 1){
+                let currentIds = educationInfo.map((eduObj)=>{
+                    return eduObj.id
+                })
+                let counter = 0
+                while(!newId){
+                    if(currentIds.indexOf(counter) === -1){
+                        newId = counter
+                        eduIndex = currentIds.length
+                    }
+                    counter++
+                }
+            } else {
+                newId = 0
+                eduIndex = 0
+            }
+            handleNewEducation(newId)
+            console.log(educationInfo)
+            return(
+                <>
+                    <label htmlFor="school-name">School Name</label>
+                    <input value={educationInfo[eduIndex]["school-name"]} onChange={(e)=>{handleEducation("school-name", newId, e.target.value)}} type="text" id="school-name" />
+                    
+                    <label htmlFor="study-title">Title of Study</label>
+                    <input value={educationInfo[eduIndex]["study-title"]} onChange={(e)=>{handleEducation("study-title", newId, e.target.value)}} type="text" id="study-title" />
+                    
+                    <label htmlFor="study-date-start">Start Date</label>
+                    <input value={educationInfo[eduIndex]["study-date-start"]} onChange={(e)=>{handleEducation("study-date-start", newId, e.target.value)}} type="text" id="study-date-start" />
+    
+                    <label htmlFor="study-date-end">End Date</label>
+                    <input value={educationInfo[eduIndex]["study-date-end"]} onChange={(e)=>{handleEducation("study-date-end", newId, e.target.value)}} type="text" id="study-date-start" />
+                </>
+            )
+        }
+        
     }else{
         return null
     }
 }
 
-function Work({ expand }){
+function Work({ workInfo, handleWork, expand }){
     if(expand){
         return(
             <>
                 <label htmlFor="company-name">Company Name: </label>
-                <input type="text" id="company-name" />
+                <input value={workInfo["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
                 
                 <label htmlFor="position-title">Position Title: </label>
-                <input type="text" id="position-title" />
+                <input value={workInfo["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
 
                 <label htmlFor="responsibilities">Responsibilities: </label>
-                <input type="text" id="responsibilities" />
+                <input value={workInfo["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
                 
-                <label htmlFor="start-date">Start Date: </label>
-                <input type="date" id="start-date" />
+                <label htmlFor="work-date-start">Start Date</label>
+                <input value={workInfo["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
 
-                <label htmlFor="end-date">End Date: </label>
-                <input type="date" id="end-date" />
+                <label htmlFor="work-date-end">End Date</label>
+                <input value={workInfo["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
             </>
         )
     } else{
@@ -47,7 +75,8 @@ function Work({ expand }){
     }
 }
 
-export default function Form({ generalInfo, handleGeneral}){
+export default function Form({ generalInfo, handleGeneral, educationInfo,
+     handleEducation, handleNewEducation, workInfo, handleWork }){
 
     let [expanded, setExpanded] = useState({edu:false,work:false})
 
@@ -77,13 +106,14 @@ export default function Form({ generalInfo, handleGeneral}){
                 <Card onClick={()=>handleExpand("edu")}>
                     <section id="education">
                         <h2>Education</h2>
-                        <Education expand={expanded.edu} />
+                        <Education educationInfo={educationInfo}
+     handleEducation={handleEducation} handleNewEducation={handleNewEducation} expand={expanded.edu} />
                     </section>
                 </Card>
                 <Card onClick={()=>handleExpand("work")}>
                     <section id="experience">
                         <h2>Work Experience</h2>
-                        <Work expand={expanded.work} />
+                        <Work workInfo={workInfo} handleWork={handleWork} expand={expanded.work} />
                     </section>
                 </Card>
             </form>

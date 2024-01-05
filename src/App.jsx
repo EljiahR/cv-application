@@ -15,18 +15,42 @@ function App() {
       setGeneralInfo(newGeneral)
   }
 
-  const handleEducation = (target, input)=>{
-  
+  const handleEducation = (target, id, input)=>{
+    let newEducation = educationInfo.map((eduObj)=>{
+      if(id === eduObj.id){
+        let newEduObj = {...eduObj}
+        newEduObj[target] = input
+        return newEduObj
+      } else {
+        return {...eduObj}
+      }
+    })
+    setEducationInfo(newEducation)
   }
-  
+
+  const handleNewEducation = (newId)=>{
+    
+    const newEducation = [...educationInfo,{
+      id:newId,
+      "school-name":"",
+      "study-title":"",
+      "study-date-start":"",
+      "study-date-end":""  
+    }]
+    console.log(newEducation)
+    setEducationInfo(newEducation)
+  }
+
   const handleWork = (target, input)=>{
-  
+    let newWork = {...workInfo}
+    newWork[target] = input
+    setWorkInfo(newWork)
   }
 
   return (
     <>
       <Form generalInfo={generalInfo} handleGeneral={handleGeneral}
-      educationInfo={educationInfo} handleEducation={handleEducation}
+      educationInfo={educationInfo} handleEducation={handleEducation} handleNewEducation={handleNewEducation}
       workInfo={workInfo} handleWork={handleWork}/>
       <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>
