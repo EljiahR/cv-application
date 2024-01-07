@@ -6,13 +6,15 @@ function Education({ info }){
         return(
             <div>
                 <h2>Education</h2>
-                <div className="education-row">
-                    
-                    <p>{info["study-date-start"]}-{info["study-date-end"]}</p>
-                    <h3>{info["school-name"]}</h3>
-                    <p>{info["study-title"]}</p>
-
-                </div>
+                {info.map(eduObj=>{
+                    return (
+                        <div key={eduObj.id} className="education-row">                 
+                            <p>{eduObj["study-date-start"]}-{eduObj["study-date-end"]}</p>
+                            <h3>{eduObj["school-name"]}</h3>
+                            <p>{eduObj["study-title"]}</p>
+                        </div>
+                    )
+                })}
             </div>
         )
     } else {
