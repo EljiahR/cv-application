@@ -3,8 +3,20 @@ import { useState } from "react"
 import Card from "./Card"
 import "../styles/form.css"
 
-function Education({ educationInfo, handleEducation, expand, selectedId }){
-    if(expand){
+function Education({ educationInfo, handleEducation, expand, selectedId, handleIdSelected }){
+    if(expand && selectedId === -1){
+        return (
+            <>
+                <ul>
+                    {educationInfo.map((eduObj)=>{
+                        return (
+                            <li key={"edu" + eduObj.id} onClick={()=>{handleIdSelected('edu', eduObj.id)}}>{eduObj["school-name"]}</li>
+                        )
+                    })}
+                </ul>
+            </>
+        )
+    }else if(expand && selectedId >= 0){
         return(
             <>
                 <label htmlFor="school-name">School Name</label>
@@ -52,7 +64,7 @@ function Work({ workInfo, handleWork, expand }){
 }
 
 export default function Form({ generalInfo, handleGeneral, educationInfo,
-     handleEducation, workInfo, handleWork, selectedId }){
+     handleEducation, workInfo, handleWork, selectedId, handleIdSelected }){
 
     let [expanded, setExpanded] = useState({edu:false,work:false})
 
@@ -83,7 +95,8 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
                     <section id="education">
                         <h2>Education</h2>
                         <Education educationInfo={educationInfo}
-     handleEducation={handleEducation} expand={expanded.edu} selectedId={selectedId.edu} />
+                        handleEducation={handleEducation} expand={expanded.edu} selectedId={selectedId.edu}
+                        handleIdSelected={handleIdSelected}/>
                     </section>
                 </Card>
                 <Card onClick={()=>handleExpand("work")}>
