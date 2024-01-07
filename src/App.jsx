@@ -51,7 +51,7 @@ function App() {
   }
 
   const handleIdSelected = (section, id) => {
-    console.log(section, id)
+    
     let newSelectedId = {...selectedId}
     newSelectedId[section] = id
     

@@ -30,6 +30,11 @@ function Education({ educationInfo, handleEducation, expand, selectedId, handleI
 
                 <label htmlFor="study-date-end">End Date</label>
                 <input value={educationInfo[selectedId]["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
+                
+                <div id="edu-options">
+                    <button>Clear</button>
+                    <button onClick={()=>handleIdSelected("edu",-1)}>Confirm</button>
+                </div>
             </>
         )
         
@@ -70,7 +75,7 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
 
     const handleExpand = (section)=>{
         let newExpand = {...expanded}
-        newExpand[section] = true
+        newExpand[section] = !newExpand[section]
         setExpanded(newExpand)
     }
 
@@ -91,9 +96,9 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
                         <input value={generalInfo.phone} type="phone" id="phone" onChange={(e)=>handleGeneral("phone",e.target.value)} />
                     </section>
                 </Card>
-                <Card onClick={()=>handleExpand("edu")}>
+                <Card >
                     <section id="education">
-                        <h2>Education</h2>
+                        <h2 onClick={()=>handleExpand("edu")}>Education</h2>
                         <Education educationInfo={educationInfo}
                         handleEducation={handleEducation} expand={expanded.edu} selectedId={selectedId.edu}
                         handleIdSelected={handleIdSelected}/>
