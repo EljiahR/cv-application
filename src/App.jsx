@@ -6,13 +6,14 @@ import Resume from './components/Resume';
 function App() {
 
   let [generalInfo, setGeneralInfo] = useState({name:"John Smith",email:"hisname@yahoo.com",phone:"808-555-1414"});
-  let [educationInfo, setEducationInfo] = useState(
-    [
+  let [educationInfo, setEducationInfo] = useState([
       {id:0,"school-name":"Business University", "study-title": "Business", "study-date-start":"03/2002","study-date-end":"present"},
       {id:1,"school-name":"Big Business State", "study-title": "Art", "study-date-start":"10/2007","study-date-end":"05/2010"}
     ])
-  let [workInfo, setWorkInfo] = useState({"company-name":"Big Company", "position-title": "Janitor", "responsibilities":"Mopping all 100 floors of Big Company every day", "work-date-start": "12/2001", "work-date-end": "present"})
-  let [selectedId, setSelectedId] = useState({edu:-1,work:0})
+  let [workInfo, setWorkInfo] = useState([
+    {id:0, "company-name":"Big Company", "position-title": "Janitor", "responsibilities":"Mopping all 100 floors of Big Company every day", "work-date-start": "12/2001", "work-date-end": "present"}
+  ])
+  let [selectedId, setSelectedId] = useState({edu:-1,work:-1})
 
   const handleGeneral = (target, input)=>{
       let newGeneral = {...generalInfo}

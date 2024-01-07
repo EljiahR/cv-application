@@ -43,24 +43,36 @@ function Education({ educationInfo, handleEducation, expand, selectedId, handleI
     }
 }
 
-function Work({ workInfo, handleWork, expand }){
-    if(expand){
+function Work({ workInfo, handleWork, expand, selectedId, handleIdSelected }){
+    if(expand && selectedId === -1){
+        return (
+            <>
+                <ul>
+                    {workInfo.map((workObj)=>{
+                        return (
+                            <li key={"work" + workObj.id} onClick={()=>{handleIdSelected('work', workObj.id)}}>{workObj["company-name"]}</li>
+                        )
+                    })}
+                </ul>
+            </>
+        )
+    } else if(expand && selectedId >= 0){
         return(
             <>
                 <label htmlFor="company-name">Company Name: </label>
-                <input value={workInfo["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
+                <input value={workInfo[selectedId]["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
                 
                 <label htmlFor="position-title">Position Title: </label>
-                <input value={workInfo["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
+                <input value={workInfo[selectedId]["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
 
                 <label htmlFor="responsibilities">Responsibilities: </label>
-                <input value={workInfo["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
+                <input value={workInfo[selectedId]["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
                 
                 <label htmlFor="work-date-start">Start Date</label>
-                <input value={workInfo["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
+                <input value={workInfo[selectedId]["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
 
                 <label htmlFor="work-date-end">End Date</label>
-                <input value={workInfo["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
+                <input value={workInfo[selectedId]["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
             </>
         )
     } else{
@@ -104,10 +116,11 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
                         handleIdSelected={handleIdSelected}/>
                     </section>
                 </Card>
-                <Card onClick={()=>handleExpand("work")}>
+                <Card >
                     <section id="experience">
-                        <h2>Work Experience</h2>
-                        <Work workInfo={workInfo} handleWork={handleWork} expand={expanded.work} />
+                        <h2 onClick={()=>handleExpand("work")}>Work Experience</h2>
+                        <Work workInfo={workInfo} handleWork={handleWork} expand={expanded.work}
+                        selectedId={selectedId.work} handleIdSelected={handleIdSelected} />
                     </section>
                 </Card>
             </form>
