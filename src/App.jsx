@@ -21,13 +21,19 @@ function App() {
       setGeneralInfo(newGeneral)
   }
 
-  const handleEducation = (target, input)=>{
+  const handleEducation = (target = "", input = "")=>{
     
     let newEducation = educationInfo.map((eduObj)=>{
       
       if(selectedId.edu === eduObj.id){
-        let eduCopy = {...eduObj}
-        eduCopy[target] = input
+        let eduCopy
+        if(target === ""){
+          eduCopy = {id:eduObj.id,"school-name":"", "study-title": "", "study-date-start":"","study-date-end":""}
+        }else{
+          eduCopy = {...eduObj}
+          eduCopy[target] = input
+        }
+        
         return eduCopy
       }
       return ({...eduObj})
@@ -36,14 +42,20 @@ function App() {
     setEducationInfo(newEducation)
   }
 
-  const handleWork = (target, input)=>{
+  const handleWork = (target = "", input = '')=>{
      
     let newWork = workInfo.map((workObj)=>{
       
       if(selectedId.work === workObj.id){
-        let eduCopy = {...workObj}
-        eduCopy[target] = input
-        return eduCopy
+        let workCopy
+        if(target === ""){
+          workCopy = {id:workObj.id, "company-name":"", "position-title": "", "responsibilities":"", "work-date-start": "", "work-date-end": ""}
+        }else {
+          workCopy = {...workObj}
+          workCopy[target] = input
+        }
+        
+        return workCopy
       }
       return ({...workObj})
     })
@@ -69,8 +81,40 @@ function App() {
         newInfo = workInfo.filter((obj) => obj.id !== id)
         setWorkInfo(newInfo)
       }
-      console.log(newInfo)
     }
+  }
+
+  const handleNewInfo = (section) => {
+    let idList
+    let newObj
+    let newObjArray
+    let newId = 0
+    if(section === 'edu'){
+      idList = educationInfo.map(obj =>{
+        return obj.id
+      })
+      console.log(idList)
+      while(idList.indexOf(newId) > -1){
+        newId++
+      }
+      newObj = {id:newId,"school-name":"", "study-title": "", "study-date-start":"","study-date-end":""}
+      newObjArray = [...educationInfo, newObj]
+      setEducationInfo(newObjArray)
+      
+    } else if(section === 'work'){
+      idList = workInfo.map(obj =>{
+        return obj.id
+      })
+      while(idList.indexOf(newId) > -1){
+        newId++
+      }
+      newObj = {id:newId, "company-name":"", "position-title": "", "responsibilities":"", "work-date-start": "", "work-date-end": ""}
+      newObjArray = [...workInfo, newObj]
+      setWorkInfo(newObjArray)
+    }
+    let newSelection = {...selectedId}
+    newSelection[section] = newId
+    setSelectedId(newSelection)
   }
 
   return (
@@ -78,7 +122,8 @@ function App() {
       <Form generalInfo={generalInfo} handleGeneral={handleGeneral}
       educationInfo={educationInfo} handleEducation={handleEducation}
       workInfo={workInfo} handleWork={handleWork} selectedId={selectedId}
-      handleIdSelected={handleIdSelected} handleDeleteInfo={handleDeleteInfo} />
+      handleIdSelected={handleIdSelected} handleDeleteInfo={handleDeleteInfo}
+      handleNewInfo={handleNewInfo} />
       <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>
     
