@@ -59,12 +59,26 @@ function App() {
     setSelectedId(newSelectedId)
   }
 
+  const handleDeleteInfo = (section, id) => {
+    if(confirm("Are you sure you want to delete this?")){
+      let newInfo
+      if(section === 'edu'){
+        newInfo = educationInfo.filter((obj) => obj.id !== id)
+        setEducationInfo(newInfo)
+      } else if(section === 'work'){
+        newInfo = workInfo.filter((obj) => obj.id !== id)
+        setWorkInfo(newInfo)
+      }
+      console.log(newInfo)
+    }
+  }
+
   return (
     <>
       <Form generalInfo={generalInfo} handleGeneral={handleGeneral}
       educationInfo={educationInfo} handleEducation={handleEducation}
       workInfo={workInfo} handleWork={handleWork} selectedId={selectedId}
-      handleIdSelected={handleIdSelected} />
+      handleIdSelected={handleIdSelected} handleDeleteInfo={handleDeleteInfo} />
       <Resume generalInfo={generalInfo} educationInfo={educationInfo} workInfo={workInfo} />
     </>
     

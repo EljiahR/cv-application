@@ -3,14 +3,17 @@ import { useState } from "react"
 import Card from "./Card"
 import "../styles/form.css"
 
-function Education({ educationInfo, handleEducation, expand, selectedId, handleIdSelected }){
+function Education({ educationInfo, handleEducation, expand, selectedId, handleIdSelected, handleDeleteInfo }){
     if(expand && selectedId === -1){
         return (
             <>
                 <ul>
                     {educationInfo.map((eduObj)=>{
                         return (
-                            <li key={"edu" + eduObj.id} onClick={()=>{handleIdSelected('edu', eduObj.id)}}>{eduObj["school-name"]}</li>
+                            <li key={"edu" + eduObj.id}>
+                                <button onClick={()=>handleDeleteInfo('edu', eduObj.id)} id='delete-btn'>X</button>
+                                <p onClick={()=>{handleIdSelected('edu', eduObj.id)}}>{eduObj["school-name"]}</p>
+                            </li>
                         )
                     })}
                 </ul>
@@ -20,16 +23,16 @@ function Education({ educationInfo, handleEducation, expand, selectedId, handleI
         return(
             <>
                 <label htmlFor="school-name">School Name</label>
-                <input value={educationInfo[selectedId]["school-name"]} onChange={(e)=>handleEducation("school-name",e.target.value)} type="text" id="school-name" />
+                <input value={educationInfo.find(obj => obj.id === selectedId)["school-name"]} onChange={(e)=>handleEducation("school-name",e.target.value)} type="text" id="school-name" />
                 
                 <label htmlFor="study-title">Title of Study</label>
-                <input value={educationInfo[selectedId]["study-title"]} onChange={(e)=>handleEducation("study-title",e.target.value)} type="text" id="study-title" />
+                <input value={educationInfo.find(obj => obj.id === selectedId)["study-title"]} onChange={(e)=>handleEducation("study-title",e.target.value)} type="text" id="study-title" />
                 
                 <label htmlFor="study-date-start">Start Date</label>
-                <input value={educationInfo[selectedId]["study-date-start"]} onChange={(e)=>handleEducation("study-date-start",e.target.value)} type="text" id="study-date-start" />
+                <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-start"]} onChange={(e)=>handleEducation("study-date-start",e.target.value)} type="text" id="study-date-start" />
 
                 <label htmlFor="study-date-end">End Date</label>
-                <input value={educationInfo[selectedId]["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
+                <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
                 
                 <div id="edu-options">
                     <button>Clear</button>
@@ -60,19 +63,19 @@ function Work({ workInfo, handleWork, expand, selectedId, handleIdSelected }){
         return(
             <>
                 <label htmlFor="company-name">Company Name: </label>
-                <input value={workInfo[selectedId]["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
+                <input value={workInfo.find(obj => obj.id === selectedId)["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
                 
                 <label htmlFor="position-title">Position Title: </label>
-                <input value={workInfo[selectedId]["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
+                <input value={workInfo.find(obj => obj.id === selectedId)["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
 
                 <label htmlFor="responsibilities">Responsibilities: </label>
-                <input value={workInfo[selectedId]["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
+                <input value={workInfo.find(obj => obj.id === selectedId)["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
                 
                 <label htmlFor="work-date-start">Start Date</label>
-                <input value={workInfo[selectedId]["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
+                <input value={workInfo.find(obj => obj.id === selectedId)["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
 
                 <label htmlFor="work-date-end">End Date</label>
-                <input value={workInfo[selectedId]["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
+                <input value={workInfo.find(obj => obj.id === selectedId)["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
             </>
         )
     } else{
@@ -81,7 +84,7 @@ function Work({ workInfo, handleWork, expand, selectedId, handleIdSelected }){
 }
 
 export default function Form({ generalInfo, handleGeneral, educationInfo,
-     handleEducation, workInfo, handleWork, selectedId, handleIdSelected }){
+     handleEducation, workInfo, handleWork, selectedId, handleIdSelected, handleDeleteInfo }){
 
     let [expanded, setExpanded] = useState({edu:false,work:false})
 
@@ -113,14 +116,14 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
                         <h2 onClick={()=>handleExpand("edu")}>Education</h2>
                         <Education educationInfo={educationInfo}
                         handleEducation={handleEducation} expand={expanded.edu} selectedId={selectedId.edu}
-                        handleIdSelected={handleIdSelected}/>
+                        handleIdSelected={handleIdSelected} handleDeleteInfo={handleDeleteInfo}/>
                     </section>
                 </Card>
                 <Card >
                     <section id="experience">
                         <h2 onClick={()=>handleExpand("work")}>Work Experience</h2>
                         <Work workInfo={workInfo} handleWork={handleWork} expand={expanded.work}
-                        selectedId={selectedId.work} handleIdSelected={handleIdSelected} />
+                        selectedId={selectedId.work} handleIdSelected={handleIdSelected} handleDeleteInfo={handleDeleteInfo} />
                     </section>
                 </Card>
             </form>
