@@ -23,18 +23,22 @@ function Education({ educationInfo, handleEducation, expand, selectedId, handleI
     }else if(expand && selectedId >= 0){
         return(
             <>
-                <label htmlFor="school-name">School Name</label>
-                <input value={educationInfo.find(obj => obj.id === selectedId)["school-name"]} onChange={(e)=>handleEducation("school-name",e.target.value)} type="text" id="school-name" />
-                
-                <label htmlFor="study-title">Title of Study</label>
-                <input value={educationInfo.find(obj => obj.id === selectedId)["study-title"]} onChange={(e)=>handleEducation("study-title",e.target.value)} type="text" id="study-title" />
-                
-                <label htmlFor="study-date-start">Start Date</label>
-                <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-start"]} onChange={(e)=>handleEducation("study-date-start",e.target.value)} type="text" id="study-date-start" />
-
-                <label htmlFor="study-date-end">End Date</label>
-                <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
-                
+                <label>
+                    School Name:
+                    <input value={educationInfo.find(obj => obj.id === selectedId)["school-name"]} onChange={(e)=>handleEducation("school-name",e.target.value)} type="text" id="school-name" />
+                </label>
+                <label>
+                    Title of Study:
+                    <input value={educationInfo.find(obj => obj.id === selectedId)["study-title"]} onChange={(e)=>handleEducation("study-title",e.target.value)} type="text" id="study-title" />
+                </label>
+                <label>
+                    Start Date:
+                    <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-start"]} onChange={(e)=>handleEducation("study-date-start",e.target.value)} type="text" id="study-date-start" />
+                </label>
+                <label>
+                    End Date:
+                    <input value={educationInfo.find(obj => obj.id === selectedId)["study-date-end"]} onChange={(e)=>handleEducation("study-date-end",e.target.value)} type="text" id="study-date-start" />
+                </label>
                 <div id="edu-options">
                     <button type="button" onClick={()=>{handleEducation()}}>Clear</button>
                     <button type="button" onClick={()=>handleIdSelected("edu",-1)}>Confirm</button>
@@ -68,21 +72,26 @@ function Work({ workInfo, handleWork, expand, selectedId, handleIdSelected, hand
     } else if(expand && selectedId >= 0){
         return(
             <>
-                <label htmlFor="company-name">Company Name: </label>
-                <input value={workInfo.find(obj => obj.id === selectedId)["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
-                
-                <label htmlFor="position-title">Position Title: </label>
-                <input value={workInfo.find(obj => obj.id === selectedId)["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
-
-                <label htmlFor="responsibilities">Responsibilities: </label>
-                <input value={workInfo.find(obj => obj.id === selectedId)["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
-                
-                <label htmlFor="work-date-start">Start Date</label>
-                <input value={workInfo.find(obj => obj.id === selectedId)["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
-
-                <label htmlFor="work-date-end">End Date</label>
-                <input value={workInfo.find(obj => obj.id === selectedId)["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
-
+                <label>
+                    Company Name:
+                    <input value={workInfo.find(obj => obj.id === selectedId)["company-name"]} onChange={(e)=>{handleWork("company-name",e.target.value)}} type="text" id="company-name" />
+                </label>
+                <label>
+                    Position Title: 
+                    <input value={workInfo.find(obj => obj.id === selectedId)["position-title"]} onChange={(e)=>{handleWork("position-title",e.target.value)}} type="text" id="position-title" />
+                </label>
+                <label>
+                    Responsibilities: 
+                    <input value={workInfo.find(obj => obj.id === selectedId)["responsibilities"]} onChange={(e)=>{handleWork("responsibilities",e.target.value)}} type="text" id="responsibilities" />
+                </label>
+                <label>
+                    Start Date:
+                    <input value={workInfo.find(obj => obj.id === selectedId)["work-date-start"]} onChange={(e)=>{handleWork("work-date-start",e.target.value)}} type="text" id="work-date-start" />
+                </label>
+                <label>
+                    End Date:
+                    <input value={workInfo.find(obj => obj.id === selectedId)["work-date-end"]} onChange={(e)=>{handleWork("work-date-end",e.target.value)}} type="text" id="work-date-end" />
+                </label>
                 <div id="work-options">
                     <button type="button" onClick={()=>{handleWork()}}>Clear</button>
                     <button type="button" onClick={()=>handleIdSelected("work",-1)}>Confirm</button>
@@ -109,18 +118,27 @@ export default function Form({ generalInfo, handleGeneral, educationInfo,
     return (
         <div className="form-container">
             
-            <form action="POST">
+            <form id="form" action="POST">
                 <Card>
                     <section id="general">
                         <h2>General Info</h2>
-                        <label htmlFor="name">Full Name: </label>
-                        <input value={generalInfo.name} type="text" id="name" onChange={(e)=>handleGeneral("name",e.target.value)} />
-                        
-                        <label htmlFor="email">Email: </label>
-                        <input value={generalInfo.email} type="email" id="email" onChange={(e)=>handleGeneral("email",e.target.value)} />
-                        
-                        <label htmlFor="phone">Phone Number: </label>
-                        <input value={generalInfo.phone} type="phone" id="phone" onChange={(e)=>handleGeneral("phone",e.target.value)} />
+                        <label>
+                            Full Name: 
+                            <input value={generalInfo.name} type="text" id="name" onChange={(e)=>handleGeneral("name",e.target.value)} />
+                        </label>
+                       
+                        <label>
+                            Email: 
+                            <input value={generalInfo.email} type="email" id="email" onChange={(e)=>handleGeneral("email",e.target.value)} />
+                        </label>
+                        <label>
+                            Phone Number: 
+                            <input value={generalInfo.phone} type="phone" id="phone" onChange={(e)=>handleGeneral("phone",e.target.value)} />
+                        </label>
+                        <label>
+                            Location: 
+                            <input value={generalInfo.location} type="text" id="location" onChange={(e)=>handleGeneral("location",e.target.value)} />
+                        </label>
                     </section>
                 </Card>
                 

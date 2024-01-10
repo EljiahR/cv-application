@@ -5,7 +5,7 @@ import Resume from './components/Resume';
 
 function App() {
 
-  let [generalInfo, setGeneralInfo] = useState({name:"John Smith",email:"hisname@yahoo.com",phone:"808-555-1414"});
+  let [generalInfo, setGeneralInfo] = useState({name:"John Smith",email:"hisname@yahoo.com",phone:"808-555-1414", location: "My, House"});
   let [educationInfo, setEducationInfo] = useState([
       {id:0,"school-name":"Business University", "study-title": "Business", "study-date-start":"03/2002","study-date-end":"present"},
       {id:1,"school-name":"Big Business State", "study-title": "Art", "study-date-start":"10/2007","study-date-end":"05/2010"}
